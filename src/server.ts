@@ -2,8 +2,8 @@ import fastify from 'fastify'
 
 const app = fastify()
 
-app.get('/users', () => {
-  return 'e'
+app.get('/', () => {
+  return 'Hello world'
 })
 
 app
