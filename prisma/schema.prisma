@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(uuid())
+  id       String     @id @default(uuid())
   name     String
-  email    String  @unique
+  email    String     @unique
   password String
   Token    Token[]
+  Photo    Photo[]
+  Comments Comments[]
 }
 
 model Token {
@@ -20,5 +22,28 @@ model Token {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   token     String
+  createdAt DateTime @default(now())
+}
+
+model Photo {
+  id        String     @id @default(uuid())
+  nome      String
+  peso      Float
+  idade     Int
+  imagem    String
+  acessos   Int        @default(0)
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Comments  Comments[]
+  createdAt DateTime   @default(now())
+}
+
+model Comments {
+  id        String   @id @default(uuid())
+  comment   String
+  photoId   String
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }

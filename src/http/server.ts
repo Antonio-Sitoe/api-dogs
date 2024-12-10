@@ -12,6 +12,11 @@ import { signInUser } from './routes/users/sign-in'
 import { passwordRecover } from './routes/users/password-reset'
 import { CreatePhoto } from './routes/photo/create-photo'
 import multipart from '@fastify/multipart'
+import { DeletePhoto } from './routes/photo/delete-photo'
+import { createComments } from './routes/comment/create-comments'
+import { getComments } from './routes/comment/get-comments'
+import { getOnePhoto } from './routes/photo/get-one-photos'
+import { getAllPhotos } from './routes/photo/get-all-photos'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -29,6 +34,11 @@ app.register(CreateUser)
 app.register(signInUser)
 app.register(passwordRecover)
 app.register(CreatePhoto)
+app.register(DeletePhoto)
+app.register(createComments)
+app.register(getComments)
+app.register(getOnePhoto)
+app.register(getAllPhotos)
 
 app
   .listen({
