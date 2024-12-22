@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
+import { BadRequestError } from '../_errors/bad-request-error'
 
 const schema = z.object({
   id: z.string(),
@@ -22,6 +23,9 @@ export function getOnePhoto(app: FastifyInstance) {
           },
         },
       })
+      if (!data) {
+        throw new BadRequestError('Photo not found')
+      }
       const acessos = (data?.acessos ?? 0) + 1
       await prisma.photo.update({
         where: {

@@ -17,6 +17,7 @@ import { createComments } from './routes/comment/create-comments'
 import { getComments } from './routes/comment/get-comments'
 import { getOnePhoto } from './routes/photo/get-one-photos'
 import { getAllPhotos } from './routes/photo/get-all-photos'
+import { me } from './routes/users/me'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -39,6 +40,7 @@ app.register(createComments)
 app.register(getComments)
 app.register(getOnePhoto)
 app.register(getAllPhotos)
+app.register(me)
 
 app
   .listen({

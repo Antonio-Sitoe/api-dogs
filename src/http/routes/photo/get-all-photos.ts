@@ -19,6 +19,7 @@ export function getAllPhotos(app: FastifyInstance) {
       const total = parseInt(String(_total), 10)
       const page = parseInt(String(_page), 10)
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const filters: any = {}
 
       if (_user) {
@@ -29,7 +30,7 @@ export function getAllPhotos(app: FastifyInstance) {
         where: filters,
         skip: (page - 1) * total,
         take: total,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: 'asc' },
       })
 
       const count = await prisma.photo.count({
