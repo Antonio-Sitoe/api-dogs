@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { auth } from '../middlewares/auth'
 
 export async function me(app: FastifyInstance) {
-  app.register(auth).post('/users/me', async (req, reply) => {
+  app.register(auth).get('/users/me', async (req, reply) => {
     try {
       const userId = (await req.getCurrentUserId()) as string
 
