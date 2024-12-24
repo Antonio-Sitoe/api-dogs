@@ -16,9 +16,24 @@ export function getOnePhoto(app: FastifyInstance) {
       const data = await prisma.photo.findFirst({
         where: { id },
         include: {
+          user: {
+            select: {
+              name: true,
+            },
+          },
           Comments: {
             orderBy: {
-              createdAt: 'desc',
+              createdAt: 'asc',
+            },
+            select: {
+              id: true,
+              comment: true,
+              createdAt: true,
+              user: {
+                select: {
+                  name: true,
+                },
+              },
             },
           },
         },
@@ -35,7 +50,20 @@ export function getOnePhoto(app: FastifyInstance) {
           acessos,
         },
       })
-      return reply.send({ success: true, data: { ...data, acessos } })
+      return reply.send({
+        success: true,
+        data: {
+          ...data,
+          acessos,
+          author: data.user.name,
+          comments: data.Comments.map((item) => ({
+            comment_ID: item.id,
+            comment_post_ID: id,
+            comment_author: item.user.name,
+            comment_content: item.comment,
+          })),
+        },
+      })
     } catch (error) {
       console.error(error)
       return reply.status(500).send({

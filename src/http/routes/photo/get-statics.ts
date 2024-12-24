@@ -3,9 +3,10 @@ import { prisma } from '@/lib/prisma'
 
 import { FastifyInstance } from 'fastify'
 import { BadRequestError } from '../_errors/bad-request-error'
+import { auth } from '../middlewares/auth'
 
-export function getOnePhoto(app: FastifyInstance) {
-  app.get('/photo/statics', async (req, reply) => {
+export function getStatics(app: FastifyInstance) {
+  app.register(auth).get('/photo/statics', async (req, reply) => {
     try {
       const userId = (await req.getCurrentUserId()) as string
       const data = await prisma.photo.findMany({
