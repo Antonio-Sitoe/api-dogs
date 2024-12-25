@@ -1,9 +1,46 @@
-[x] - Buscar todas as fotos
-[x] - Buscar uma foto e suas informacoes
+# Social Network for dogs
 
-- [x] - comentarios e dados
-    [x] - Buscar meus dados
-    [x] - Buscar todas fotos pertencentes a aquele perfil
+This repository contains an API project focused on dogs-related data and operations.
 
-[x] - ver galeria das minhas fotos
-[x] - ver estatisticas por fotos acessos
+## Description
+
+This API provides endpoints to manage and retrieve information about dogs, including breeds, characteristics, and more.
+
+## Features
+
+- Dog breeds information
+- Dog characteristics
+- RESTful endpoints
+- Easy to integrate
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/antonio-sitoe/api-dogs.git
+
+# Install dependencies
+yarn install
+```
+
+## Usage
+
+```bash
+# Start the server
+yarn dev
+```
+
+## API Documentation
+
+[Documentation will be added here]
+
+## Contributing
+
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
