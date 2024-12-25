@@ -40,6 +40,7 @@ app.register(createComments)
 app.register(getComments)
 app.register(getOnePhoto)
 app.register(getAllPhotos)
+app.register(getStatics)
 app.register(me)
 
 app
