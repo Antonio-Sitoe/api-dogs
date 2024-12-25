@@ -3,17 +3,22 @@ import { prisma } from '@/lib/prisma'
 
 import { FastifyInstance } from 'fastify'
 import { auth } from '../middlewares/auth'
-import { extractParts } from '@/utils/extract-multpart'
 import { uploadToCloudinary } from '@/utils/upload-to-cloudinary'
+import { z } from 'zod'
+
+const schema = z.object({
+  idade: z.string({ message: 'Selecione uma idade' }),
+  img: z.string({ message: 'Seleciona uma imagem' }),
+  nome: z.string({ message: 'Digite um nome' }),
+  peso: z.string({ message: 'Digite um peso' }),
+})
 
 export function CreatePhoto(app: FastifyInstance) {
   app.register(auth).post('/photo', async (req, reply) => {
     const userId = await req.getCurrentUserId()
     try {
-      const parts = req.parts()
-      const { idade, img, nome, peso } = await extractParts(parts)
+      const { idade, img, nome, peso } = schema.parse(req.body)
       const imageUrl = await uploadToCloudinary(img)
-      console.log({ idade, imageUrl, nome, peso })
       const data = await prisma.photo.create({
         data: {
           idade: Number(idade),
@@ -24,7 +29,7 @@ export function CreatePhoto(app: FastifyInstance) {
           userId: String(userId),
         },
       })
-      console.log('Base de dados', data)
+      console.log({ data })
       return reply.send({ success: true, data })
     } catch (error) {
       console.error(error)

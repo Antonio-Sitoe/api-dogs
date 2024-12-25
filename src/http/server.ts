@@ -6,18 +6,20 @@ import {
   validatorCompiler,
   ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+
+import { passwordRecover } from '@/http/routes/users/password-reset'
 import { errorHandler } from '@/http/routes/error-handler'
-import { CreateUser } from './routes/users/create-users'
-import { signInUser } from './routes/users/sign-in'
-import { passwordRecover } from './routes/users/password-reset'
-import { CreatePhoto } from './routes/photo/create-photo'
+import { CreateUser } from '@/http/routes/users/create-users'
+import { signInUser } from '@/http/routes/users/sign-in'
+import { CreatePhoto } from '@/http/routes/photo/create-photo'
 import multipart from '@fastify/multipart'
-import { DeletePhoto } from './routes/photo/delete-photo'
-import { createComments } from './routes/comment/create-comments'
-import { getComments } from './routes/comment/get-comments'
-import { getOnePhoto } from './routes/photo/get-one-photos'
-import { getAllPhotos } from './routes/photo/get-all-photos'
-import { me } from './routes/users/me'
+import { DeletePhoto } from '@/http/routes/photo/delete-photo'
+import { createComments } from '@/http/routes/comment/create-comments'
+import { getComments } from '@/http/routes/comment/get-comments'
+import { getOnePhoto } from '@/http/routes/photo/get-one-photos'
+import { getAllPhotos } from '@/http/routes/photo/get-all-photos'
+import { me } from '@/http/routes/users/me'
+import { getStatics } from '@/http/routes/photo/get-statics'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 

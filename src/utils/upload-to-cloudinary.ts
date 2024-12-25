@@ -1,8 +1,9 @@
 import { v2 as cloudinary } from 'cloudinary'
 
-export async function uploadToCloudinary(imageBuffer: Buffer): Promise<string> {
+export async function uploadToCloudinary(imageBase64: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
+    cloudinary.uploader.upload(
+      imageBase64,
       {
         resource_type: 'image',
         folder: 'dogs',
@@ -15,6 +16,5 @@ export async function uploadToCloudinary(imageBuffer: Buffer): Promise<string> {
         }
       },
     )
-    uploadStream.end(imageBuffer)
   })
 }

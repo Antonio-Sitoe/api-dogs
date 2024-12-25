@@ -17,7 +17,6 @@ export function DeletePhoto(app: FastifyInstance) {
       return reply.send({ success: true, message: 'Foto deletada com sucesso' })
     } catch (error: { code: string }) {
       if (error.code === 'P2025') {
-        // Código de erro "Registro não encontrado" do Prisma
         return reply.status(404).send({
           success: false,
           message: 'Foto não encontrada',
